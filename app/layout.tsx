@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import { Sora, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 import Sidebar from "./_components/sidebar";
 
-const plusJakarta = Plus_Jakarta_Sans({
+const sora = Sora({
   subsets: ["latin"],
   display: "swap",
   weight: ["400", "500", "600", "700", "800"],
@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${plusJakarta.className}, ${jetbrainsMono.className} antialiased`}
+        className={`${sora.className} ${jetbrainsMono.className} antialiased`}
       >
         <div className="flex gap-4">
           <Sidebar /> {children}
