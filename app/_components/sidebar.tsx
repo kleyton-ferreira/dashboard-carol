@@ -4,7 +4,7 @@ import SidebarButton from "./ui/sidebar-button";
 const Sidebar = () => {
   return (
     <div
-      className="h-screen w-[340px] shadow-2xl"
+      className="h-screen w-[340px] shadow-lg"
       style={{
         background:
           "linear-gradient(-45deg, #bc91e4, #ebd8df,  #f2ebfc, #D5F0E8)",
