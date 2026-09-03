@@ -1,7 +1,15 @@
 "use client";
 
-import { PlusIcon } from "lucide-react";
+import { Loader2Icon, PlusIcon } from "lucide-react";
 import { Button } from "@/app/_components/ui/button";
+import { Input } from "@/app/_components/ui/input";
+import { NumericFormat } from "react-number-format";
+import { useState } from "react";
+import { createdProducts } from "@/app/_actions/create-product";
+import {
+  CreateProductSchema,
+  createProductSchema,
+} from "@/app/_actions/create-product/schema";
 
 import {
   Dialog,
@@ -13,7 +21,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/app/_components/ui/dialog";
-import z from "zod";
+
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -24,35 +32,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/app/_components/ui/form";
-import { Input } from "@/app/_components/ui/input";
-import { NumericFormat } from "react-number-format";
-import { useState } from "react";
-
-const formSchema = z.object({
-  nameClient: z.string().trim().min(1, {
-    message: "O nome da cliente é obrigatório.",
-  }),
-  name: z.string().trim().min(1, {
-    message: "O serviço é obrigatório",
-  }),
-
-  price: z.number().min(0.01, {
-    message: "O valor do serviço é obrigatório",
-  }),
-
-  stock: z.number().min(0, {
-    message: "A quantidade de procedimento deve ser positiva.",
-  }),
-});
-
-type FormSchema = z.infer<typeof formSchema>;
 
 const AddProductButton = () => {
-  const [isLoading, setIsloading] = useState(false);
+  const [dialogIsOpen, setDialogIsOpen] = useState(false);
 
-  const forms = useForm({
+  const forms = useForm<CreateProductSchema>({
     shouldUnregister: true,
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(createProductSchema),
     defaultValues: {
       nameClient: "",
       name: "",
@@ -61,13 +47,17 @@ const AddProductButton = () => {
     },
   });
 
-  const handleOnsubmitClick = (data: FormSchema) => {
-    setIsloading(false);
-    console.log({ data });
+  const handleOnsubmitClick = async (data: CreateProductSchema) => {
+    try {
+      await createdProducts(data);
+      setDialogIsOpen(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
-    <Dialog>
+    <Dialog open={dialogIsOpen} onOpenChange={setDialogIsOpen}>
       <DialogTrigger asChild>
         <Button variant="secondary">
           <PlusIcon size={18} /> Adicionar cliente
@@ -194,11 +184,11 @@ const AddProductButton = () => {
                 variant="secondary"
                 type="submit"
                 className="w-[30%]"
-                disabled={isLoading}
+                disabled={forms.formState.isSubmitting}
               >
-                {isLoading ? (
+                {forms.formState.isSubmitting ? (
                   <>
-                    <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                    <Loader2Icon size={16} className="animate-spin" />
                     Salvando...
                   </>
                 ) : (
