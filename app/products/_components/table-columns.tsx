@@ -25,6 +25,15 @@ export const productTableColumns: ColumnDef<Product>[] = [
     ),
   },
   {
+    accessorKey: "price",
+    header: () => (
+      <p className="group relative w-fit cursor-pointer pb-1 font-bold text-purple-600">
+        Valor do Serviço
+        <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-purple-600 transition-all duration-300 group-hover:w-[calc(100%)]"></span>
+      </p>
+    ),
+  },
+  {
     accessorKey: "stock",
     header: () => (
       <p className="group relative w-fit cursor-pointer pb-1 font-bold text-purple-600">
