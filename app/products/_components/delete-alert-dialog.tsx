@@ -1,4 +1,6 @@
 import { deleteProduct } from "@/app/_actions/delete-product";
+import { toast } from "sonner";
+
 import {
   AlertDialogAction,
   AlertDialogCancel,
@@ -8,7 +10,6 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/app/_components/ui/alert-dialog";
-import { toast } from "sonner";
 
 interface DeleteAlertDialogProps {
   product: string;

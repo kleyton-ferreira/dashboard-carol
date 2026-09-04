@@ -1,11 +1,6 @@
 import { Button } from "@/app/_components/ui/button";
-import {
-  ClipboardCopyIcon,
-  EditIcon,
-  MoreHorizontalIcon,
-  TrashIcon,
-} from "lucide-react";
-
+import { EditIcon, MoreHorizontalIcon, TrashIcon } from "lucide-react";
+import DeleteAlertDialog from "./delete-alert-dialog";
 import { Product } from "@prisma/client";
 
 import {
@@ -20,17 +15,12 @@ import {
   AlertDialog,
   AlertDialogTrigger,
 } from "@/app/_components/ui/alert-dialog";
-import DeleteAlertDialog from "./delete-alert-dialog";
 
 interface DropdownProductButtonProps {
-  product: Pick<Product, "id" | "nameClient">;
+  product: Product;
 }
 
 const DropdownProductButton = ({ product }: DropdownProductButtonProps) => {
-  const handleCopyProducId = () => {
-    return navigator.clipboard.writeText(product.id);
-  };
-
   return (
     <AlertDialog>
       <DropdownMenu>
@@ -40,29 +30,24 @@ const DropdownProductButton = ({ product }: DropdownProductButtonProps) => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuGroup className="space-y-2">
+          <DropdownMenuGroup className="space-y-1">
             <DropdownMenuLabel>Ações</DropdownMenuLabel>
-            {/* OPTIONAL... */}
-            <DropdownMenuItem className="gap-1.5" onClick={handleCopyProducId}>
-              <div className="group flex items-center gap-2 duration-300 hover:text-purple-700">
-                <ClipboardCopyIcon size={16} />
-                <p>Copiar ID</p>
-              </div>
-            </DropdownMenuItem>
 
-            <DropdownMenuItem>
-              <div className="group flex items-center gap-2 duration-300 hover:text-purple-700">
-                <EditIcon size={16} /> <p>Editar</p>
-              </div>
-            </DropdownMenuItem>
-
-            <AlertDialogTrigger asChild>
+            <div className="space-y-3">
               <DropdownMenuItem>
                 <div className="group flex items-center gap-2 duration-300 hover:text-purple-700">
-                  <TrashIcon size={16} /> <p>Deletar</p>
+                  <EditIcon size={16} /> <p>Editar</p>
                 </div>
               </DropdownMenuItem>
-            </AlertDialogTrigger>
+
+              <AlertDialogTrigger asChild>
+                <DropdownMenuItem>
+                  <div className="group flex items-center gap-2 duration-300 hover:text-purple-700">
+                    <TrashIcon size={16} /> <p>Deletar</p>
+                  </div>
+                </DropdownMenuItem>
+              </AlertDialogTrigger>
+            </div>
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
