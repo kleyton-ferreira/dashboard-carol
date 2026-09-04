@@ -3,6 +3,7 @@ import { Sora, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 import Sidebar from "./_components/sidebar";
+import { Toaster } from "sonner";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -33,6 +34,14 @@ export default function RootLayout({
         <div className="flex gap-4">
           <Sidebar /> {children}
         </div>
+        <Toaster
+          toastOptions={{
+            style: {
+              background: "#9333ea",
+              color: "#fff",
+            },
+          }}
+        />
       </body>
     </html>
   );
