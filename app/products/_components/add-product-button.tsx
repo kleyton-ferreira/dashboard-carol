@@ -25,6 +25,7 @@ import {
   DialogTrigger,
 } from "@/app/_components/ui/dialog";
 import InputsProduct from "./inputs-product";
+import { toast } from "sonner";
 
 const AddProductButton = () => {
   const [dialogIsOpen, setDialogIsOpen] = useState(false);
@@ -43,9 +44,10 @@ const AddProductButton = () => {
   const handleOnsubmitClick = async (data: CreateProductSchema) => {
     try {
       await createdProducts(data);
+      toast.success("Cliente adicionado com sucesso.");
       setDialogIsOpen(false);
     } catch (error) {
-      console.log(error);
+      toast.error("Error ao adicionar cliente.");
     }
   };
 

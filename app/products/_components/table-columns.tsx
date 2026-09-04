@@ -4,6 +4,7 @@ import { Product } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 
 import ProductStatusBadge from "./product-status-badge";
+import DropdownProductButton from "./dropdown-product-button";
 
 export const productTableColumns: ColumnDef<Product>[] = [
   {
@@ -51,5 +52,15 @@ export const productTableColumns: ColumnDef<Product>[] = [
       </p>
     ),
     cell: ({ row }) => <ProductStatusBadge product={row.original} />,
+  },
+  {
+    accessorKey: "actions",
+    header: () => (
+      <p className="group relative w-fit cursor-pointer pb-1 font-bold text-purple-600">
+        Ações
+        <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-purple-600 transition-all duration-300 group-hover:w-[calc(100%)]"></span>
+      </p>
+    ),
+    cell: ({ row }) => <DropdownProductButton product={row.original} />,
   },
 ];
