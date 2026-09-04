@@ -5,6 +5,7 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import ProductStatusBadge from "./product-status-badge";
 import DropdownProductButton from "./dropdown-product-button";
+import { formatBRL } from "@/app/_lib/formatBRL";
 
 export const productTableColumns: ColumnDef<Product>[] = [
   {
@@ -33,6 +34,7 @@ export const productTableColumns: ColumnDef<Product>[] = [
         <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-purple-600 transition-all duration-300 group-hover:w-[calc(100%)]"></span>
       </p>
     ),
+    cell: (row) => formatBRL(Number(row.row.original.price)),
   },
   {
     accessorKey: "stock",
