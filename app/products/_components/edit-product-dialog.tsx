@@ -23,14 +23,18 @@ import {
 import { Button } from "@/app/_components/ui/button";
 
 interface EditProductDialogProps {
+  defaultValues?: CreateProductSchema;
   onSuccess?: () => void;
 }
 
-const EditProductDialog = ({ onSuccess }: EditProductDialogProps) => {
+const EditProductDialog = ({
+  onSuccess,
+  defaultValues,
+}: EditProductDialogProps) => {
   const forms = useForm<CreateProductSchema>({
     shouldUnregister: true,
     resolver: zodResolver(createProductSchema),
-    defaultValues: {
+    defaultValues: defaultValues ?? {
       nameClient: "",
       name: "",
       price: 0,
@@ -38,13 +42,21 @@ const EditProductDialog = ({ onSuccess }: EditProductDialogProps) => {
     },
   });
 
+  const isEdition = !!defaultValues;
+
   const handleOnsubmitClick = async (data: CreateProductSchema) => {
     try {
-      await createdProducts(data);
-      toast.success("Cliente adicionado com sucesso.");
+      await createdProducts({ ...data, id: defaultValues?.id });
+
+      const isEditing = !!defaultValues?.id;
+      const successMessage = isEditing
+        ? "Cliente editado com sucesso."
+        : "Cliente adicionado com sucesso.";
+
+      toast.success(successMessage);
       onSuccess?.();
     } catch (error) {
-      toast.error("Error ao adicionar cliente.");
+      toast.error("Erro ao adicionar/editar cliente.");
     }
   };
   return (
@@ -53,11 +65,12 @@ const EditProductDialog = ({ onSuccess }: EditProductDialogProps) => {
         <form onSubmit={forms.handleSubmit(handleOnsubmitClick)}>
           <DialogHeader className="mb-3">
             <DialogTitle className="text-purple-600">
-              Marcação de Cliente
+              {isEdition ? "Editar" : "Marcação "} de Cliente
             </DialogTitle>
             <DialogDescription>Informções abaixo</DialogDescription>
           </DialogHeader>
 
+          {/* COMPONENTE INPUT */}
           <InputsProduct forms={forms} />
 
           <DialogFooter className="mt-8">
