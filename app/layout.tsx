@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Sora, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-import Sidebar from "./_components/sidebar";
 import { Toaster } from "sonner";
+import Layout from "./_components/layout";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -32,7 +32,7 @@ export default function RootLayout({
         className={`${sora.className} ${jetbrainsMono.className} antialiased`}
       >
         <div className="flex gap-4">
-          <Sidebar /> {children}
+          <Layout title="Serviçoes & Clientes">{children}</Layout>
         </div>
         <Toaster
           toastOptions={{

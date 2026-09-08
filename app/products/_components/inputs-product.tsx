@@ -19,52 +19,60 @@ interface ProductInputsProps {
 
 const InputsProduct = ({ forms }: ProductInputsProps) => {
   return (
-    <div className="space-y-5">
-      {/* INPUT - 1  */}
+    <div className="grid gap-4 sm:grid-cols-1 sm:gap-5 md:grid-cols-2 xl:grid-cols-1">
+      {/* INPUT - 1: Nome da Cliente */}
       <FormField
         control={forms.control}
         name="nameClient"
         render={({ field }) => (
-          <FormItem>
-            <FormLabel className="text-slate-700">Nome da cliente</FormLabel>
+          <FormItem className="w-full">
+            <FormLabel className="text-xs text-slate-700 sm:text-sm">
+              Nome da cliente
+            </FormLabel>
             <FormControl>
               <Input
                 error={!!forms.formState.errors.nameClient}
-                placeholder=""
+                placeholder="Digite o nome"
+                className="h-9 text-sm sm:h-10"
                 {...field}
               />
             </FormControl>
-            <FormMessage />
+            <FormMessage className="text-xs" />
           </FormItem>
         )}
-      ></FormField>
+      />
 
-      {/* INPUT - 2  */}
+      {/* INPUT - 2: Serviço */}
       <FormField
         control={forms.control}
         name="name"
         render={({ field }) => (
-          <FormItem>
-            <FormLabel className="text-slate-700">Serviço</FormLabel>
+          <FormItem className="w-full">
+            <FormLabel className="text-xs text-slate-700 sm:text-sm">
+              Serviço
+            </FormLabel>
             <FormControl>
               <Input
                 error={!!forms.formState.errors.name}
-                placeholder=""
+                placeholder="Digite o serviço"
+                className="h-9 text-sm sm:h-10"
                 {...field}
               />
             </FormControl>
-            <FormMessage />
+            <FormMessage className="text-xs" />
           </FormItem>
         )}
-      ></FormField>
+      />
 
-      {/* INPUT - 3  */}
+      {/* INPUT - 3: Valor do Serviço */}
       <FormField
         control={forms.control}
         name="price"
         render={({ field }) => (
-          <FormItem>
-            <FormLabel className="text-slate-700">Valor do serviço</FormLabel>
+          <FormItem className="w-full">
+            <FormLabel className="text-xs text-slate-700 sm:text-sm">
+              Valor do serviço
+            </FormLabel>
             <FormControl>
               <NumericFormat
                 customInput={Input}
@@ -76,7 +84,7 @@ const InputsProduct = ({ forms }: ProductInputsProps) => {
                 fixedDecimalScale
                 placeholder="R$ 0,00"
                 error={!!forms.formState.errors.price}
-                // disabled={isPending}
+                className="h-9 text-sm sm:h-10"
                 value={field.value}
                 onValueChange={(values) => {
                   field.onChange(values.floatValue ?? 0);
@@ -85,23 +93,26 @@ const InputsProduct = ({ forms }: ProductInputsProps) => {
                 name={field.name}
               />
             </FormControl>
-            <FormMessage />
+            <FormMessage className="text-xs" />
           </FormItem>
         )}
-      ></FormField>
+      />
 
-      {/* INPUT - 4  */}
+      {/* INPUT - 4: Procedimento */}
       <FormField
         control={forms.control}
         name="stock"
         render={({ field }) => (
-          <FormItem>
-            <FormLabel className="text-slate-700">Procedimento</FormLabel>
+          <FormItem className="w-full">
+            <FormLabel className="text-xs text-slate-700 sm:text-sm">
+              Procedimento
+            </FormLabel>
             <FormControl>
               <Input
                 error={!!forms.formState.errors.stock}
                 type="number"
-                placeholder=""
+                placeholder="Digite o procedimento"
+                className="h-9 text-sm sm:h-10"
                 {...field}
                 onChange={(e) => {
                   const value = e.target.valueAsNumber;
@@ -109,10 +120,10 @@ const InputsProduct = ({ forms }: ProductInputsProps) => {
                 }}
               />
             </FormControl>
-            <FormMessage />
+            <FormMessage className="text-xs" />
           </FormItem>
         )}
-      ></FormField>
+      />
     </div>
   );
 };

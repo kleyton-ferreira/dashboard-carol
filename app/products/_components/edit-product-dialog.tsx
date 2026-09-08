@@ -59,31 +59,36 @@ const EditProductDialog = ({
       toast.error("Erro ao adicionar/editar cliente.");
     }
   };
+
   return (
-    <DialogContent>
+    <DialogContent className="w-[95%] max-w-lg rounded-lg sm:w-full">
       <Form {...forms}>
         <form onSubmit={forms.handleSubmit(handleOnsubmitClick)}>
-          <DialogHeader className="mb-3">
-            <DialogTitle className="text-purple-600">
-              {isEdition ? "Editar" : "Marcação "} de Cliente
+          <DialogHeader className="mb-4 space-y-2 sm:mb-6">
+            <DialogTitle className="text-lg text-purple-600 sm:text-xl">
+              {isEdition ? "Editar" : "Marcação"} de Cliente
             </DialogTitle>
-            <DialogDescription>Informções abaixo</DialogDescription>
+            <DialogDescription className="text-sm sm:text-base">
+              Informações abaixo
+            </DialogDescription>
           </DialogHeader>
 
           {/* COMPONENTE INPUT */}
-          <InputsProduct forms={forms} />
+          <div className="max-h-[60vh] overflow-y-auto sm:max-h-none">
+            <InputsProduct forms={forms} />
+          </div>
 
-          <DialogFooter className="mt-8">
+          <DialogFooter className="mt-6 flex flex-col-reverse gap-3 sm:mt-8 sm:flex-row sm:justify-end">
             <DialogClose asChild>
-              <Button variant="ghost" type="reset">
+              <Button variant="ghost" type="reset" className="w-full sm:w-auto">
                 Cancelar
               </Button>
             </DialogClose>
             <Button
               variant="secondary"
               type="submit"
-              className="w-[30%]"
               disabled={forms.formState.isSubmitting}
+              className="w-full sm:w-auto"
             >
               {forms.formState.isSubmitting ? (
                 <>
