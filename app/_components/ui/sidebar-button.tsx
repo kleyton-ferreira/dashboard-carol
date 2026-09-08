@@ -31,7 +31,9 @@ const SidebarButton = ({ href, children, onClick }: SidebarButtonProps) => {
     <button
       onClick={handleClick}
       className={`flex w-full items-center gap-3 rounded-lg px-4 py-3 text-left font-medium transition-all duration-200 ${
-        isActive ? "bg-purple-500 text-white shadow-md" : "text-slate-600"
+        isActive
+          ? "bg-purple-500 text-white shadow-md"
+          : "text-slate-600 hover:text-purple-600"
       }`}
     >
       {children}
