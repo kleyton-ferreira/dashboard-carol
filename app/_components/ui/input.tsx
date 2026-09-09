@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { cn } from "@/app/_lib/utils";
+import { cn } from "@/app/_herlpers/utils";
 
 interface InputProps extends React.ComponentProps<"input"> {
   error?: boolean;
