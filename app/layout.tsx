@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { Toaster } from "sonner";
 import Layout from "./_components/layout";
+import Sidebar from "./_components/sidebar";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -32,6 +33,7 @@ export default function RootLayout({
         className={`${sora.className} ${jetbrainsMono.className} antialiased`}
       >
         <div className="flex gap-4">
+          <Sidebar />
           <Layout title="Serviçoes & Clientes">{children}</Layout>
         </div>
         <Toaster

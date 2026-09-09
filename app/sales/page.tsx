@@ -1,5 +1,10 @@
 const SalesPage = () => {
-  return <div>Sales Page</div>;
+  return (
+    <div>
+      <h1>Seja bem vindo</h1>
+      <p>Top de Linha</p>
+    </div>
+  );
 };
 
 export default SalesPage;

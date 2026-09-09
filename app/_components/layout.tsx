@@ -1,9 +1,9 @@
 "use client";
 
 import { ReactNode } from "react";
-import Sidebar from "./sidebar";
 import Header from "./header";
 import { useMobileMenu } from "../_hooks/useMobileMenu";
+import SidebarResponsive from "./sidebar-responsive";
 
 interface LayoutProps {
   children: ReactNode;
@@ -15,7 +15,7 @@ export default function Layout({ children, title }: LayoutProps) {
 
   return (
     <div className="flex h-screen w-full bg-gray-50">
-      <Sidebar isOpen={isOpen} onClose={close} />
+      <SidebarResponsive isOpen={isOpen} onClose={close} />
 
       <div className="flex w-full flex-1 flex-col overflow-hidden">
         <Header title={title} onMenuClick={toggle} />
