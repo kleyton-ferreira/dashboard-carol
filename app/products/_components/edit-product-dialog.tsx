@@ -88,7 +88,7 @@ const EditProductDialog = ({
               variant="secondary"
               type="submit"
               disabled={forms.formState.isSubmitting}
-              className="w-full sm:w-auto"
+              className="w-full sm:w-[150px]"
             >
               {forms.formState.isSubmitting ? (
                 <>
