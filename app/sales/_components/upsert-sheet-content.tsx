@@ -47,6 +47,7 @@ interface UpsertSheetContentProps {
 export interface SelectedProduct {
   id: string;
   nameClient: string;
+  name: string;
   price: number;
   quantity: number;
 }
@@ -70,11 +71,22 @@ const UpsertSheetContent = ({
   const handleOnsubmit = (data: FormSchema) => {
     const selectedProduct = products.find((prod) => prod.id === data.productId);
     if (!selectedProduct) return;
+
     setSelectedProducts((currentProducts) => {
       const existingProduct = currentProducts.find(
         (product) => product.id === selectedProduct.id,
       );
+
       if (existingProduct) {
+        const productIsOuOfStock =
+          existingProduct.quantity + data.quantity > selectedProduct.stock;
+        if (productIsOuOfStock) {
+          forms.setError("quantity", {
+            message: "Quantidade indisponível de procedimento",
+          });
+          return currentProducts;
+        }
+        forms.reset();
         return currentProducts.map((prod) => {
           if (prod.id === selectedProduct.id) {
             return {
@@ -85,6 +97,15 @@ const UpsertSheetContent = ({
           return prod;
         });
       }
+
+      const productIsOuOfStock = data.quantity > selectedProduct.stock;
+      if (productIsOuOfStock) {
+        forms.setError("quantity", {
+          message: "Quantidade indisponível de procedimento",
+        });
+        return currentProducts;
+      }
+      forms.reset();
       return [
         ...currentProducts,
         {
@@ -94,11 +115,12 @@ const UpsertSheetContent = ({
         },
       ];
     });
-    forms.reset();
   };
 
+  //
+
   return (
-    <SheetContent className="!max-w-[600px]">
+    <SheetContent className="!max-w-[640px]">
       <SheetHeader>
         <SheetTitle className="font-semibold text-purple-600">
           Atendimentos de clientes
@@ -121,7 +143,7 @@ const UpsertSheetContent = ({
                 <FormLabel className="text-purple-600">Cliente</FormLabel>
 
                 <Combobox
-                  placeholder="Selecione a cliente"
+                  placeholder="Selecione a clientes"
                   options={productsOptions}
                   onChange={field.onChange}
                   value={field.value}

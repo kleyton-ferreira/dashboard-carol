@@ -8,6 +8,7 @@ import { ComboboxOption } from "../_components/ui/combobox";
 const SalesPage = async () => {
   const products = await getProducts();
   const productOptionsValues: ComboboxOption[] = products.map((prod) => ({
+    procedure: prod.name,
     label: prod.nameClient,
     value: prod.id,
   }));
