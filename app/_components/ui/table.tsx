@@ -6,12 +6,13 @@ const Table = React.forwardRef<
   HTMLTableElement,
   React.HTMLAttributes<HTMLTableElement>
 >(({ className, ...props }, ref) => (
-  <div className="relative w-full overflow-x-auto">
+  <div className="scrollbar-hide relative w-full overflow-x-auto">
     <table
       ref={ref}
       className={cn(
-        "w-full caption-bottom text-sm",
-        "md:text-base", // Aumenta font-size em desktop
+        "w-full caption-bottom",
+        "text-xs sm:text-sm md:text-base", // Responsivo para 3 breakpoints
+        "min-w-full", // Força largura mínima para scroll mobile
         className,
       )}
       {...props}
@@ -28,7 +29,7 @@ const TableHeader = React.forwardRef<
     ref={ref}
     className={cn(
       "[&_tr]:border-b",
-      "hidden md:table-header-group", // Esconde header em mobile
+      "hidden sm:table-header-group", // Esconde apenas em mobile muito pequeno
       className,
     )}
     {...props}
@@ -44,7 +45,7 @@ const TableBody = React.forwardRef<
     ref={ref}
     className={cn(
       "[&_tr:last-child]:border-0",
-      "block md:table-row-group", // Display block em mobile
+      "block sm:table-row-group", // Display block em mobile
       className,
     )}
     {...props}
@@ -60,7 +61,7 @@ const TableFooter = React.forwardRef<
     ref={ref}
     className={cn(
       "border-t bg-muted/50 font-medium [&>tr]:last:border-b-0",
-      "block md:table-footer-group",
+      "block sm:table-footer-group",
       className,
     )}
     {...props}
@@ -76,11 +77,13 @@ const TableRow = React.forwardRef<
     ref={ref}
     className={cn(
       "border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted",
-      "block md:table-row", // Muda pra block em mobile
-      "mb-4 md:mb-0", // Margin em mobile, remove em desktop
-      "rounded-lg md:rounded-none", // Border-radius em mobile
-      "border md:border-b", // Completa border em mobile
+      "block sm:table-row", // Muda pra block em mobile
+      "mb-3 sm:mb-0", // Margin em mobile
+      "rounded-lg sm:rounded-none", // Border-radius em mobile
+      "border sm:border-b", // Completa border em mobile
       "overflow-hidden", // Contém conteúdo dentro da borda
+      "shadow-sm sm:shadow-none", // Sombra em mobile para profundidade
+      "bg-card sm:bg-transparent", // Background em mobile
       className,
     )}
     {...props}
@@ -96,9 +99,10 @@ const TableHead = React.forwardRef<
     ref={ref}
     className={cn(
       "h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0",
-      "py-2 md:h-12 md:py-0", // Padding reduzido em mobile
-      "px-3 md:px-4", // Padding horizontal reduzido em mobile
-      "text-xs md:text-sm", // Fonte menor em mobile
+      "py-2 sm:h-12 sm:py-0", // Padding reduzido em mobile
+      "px-2 sm:px-3 md:px-4", // Padding horizontal responsivo
+      "text-xs sm:text-sm md:text-base", // Fonte responsiva
+      "font-semibold", // Destaca headers
       className,
     )}
     {...props}
@@ -114,13 +118,15 @@ const TableCell = React.forwardRef<
     ref={ref}
     className={cn(
       "p-4 align-middle [&:has([role=checkbox])]:pr-0",
-      "block md:table-cell", // Display block em mobile
-      "py-2 md:py-4", // Padding vertical reduzido em mobile
-      "px-3 md:px-4", // Padding horizontal reduzido em mobile
-      "text-xs md:text-sm", // Fonte menor em mobile
-      "before:font-medium before:text-muted-foreground before:content-[attr(data-label)] md:before:content-none", // Label em mobile
-      "before:block md:before:hidden", // Mostra/esconde label
-      "before:mb-2 md:before:mb-0", // Espaço após label
+      "block sm:table-cell", // Display block em mobile
+      "py-2.5 sm:py-3 md:py-4", // Padding vertical responsivo
+      "px-2 sm:px-3 md:px-4", // Padding horizontal responsivo
+      "text-xs sm:text-sm md:text-base", // Fonte responsiva
+      "before:font-semibold before:text-muted-foreground before:content-[attr(data-label)] sm:before:content-none", // Label em mobile
+      "before:block sm:before:hidden", // Mostra/esconde label
+      "before:mb-1.5 sm:before:mb-0", // Espaço após label
+      "before:text-xs sm:before:text-sm", // Fonte do label responsiva
+      "before:uppercase before:tracking-wide", // Estilo do label
       className,
     )}
     {...props}
@@ -135,8 +141,8 @@ const TableCaption = React.forwardRef<
   <caption
     ref={ref}
     className={cn(
-      "mt-4 text-sm text-muted-foreground",
-      "text-xs md:text-sm", // Fonte reduzida em mobile
+      "mt-4 text-muted-foreground",
+      "text-xs sm:text-sm", // Fonte reduzida em mobile
       className,
     )}
     {...props}

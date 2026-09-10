@@ -31,16 +31,16 @@ const SheetOverlay = React.forwardRef<
 SheetOverlay.displayName = SheetPrimitive.Overlay.displayName;
 
 const sheetVariants = cva(
-  "fixed z-50 gap-4 bg-background p-6 shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-500 data-[state=open]:duration-700 data-[state=open]:ease-out data-[state=closed]:ease-in-out",
+  "fixed z-50 gap-4 bg-background p-4 shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-500 data-[state=open]:duration-700 data-[state=open]:ease-out data-[state=closed]:ease-in-out md:p-6",
   {
     variants: {
       side: {
-        top: "inset-x-0 top-0 border-b data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top",
+        top: "inset-x-0 top-0 border-b max-h-[50vh] md:max-h-[60vh] data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top overflow-y-auto",
         bottom:
-          "inset-x-0 bottom-0 border-t data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom",
-        left: "inset-y-0 left-0 h-full w-3/4 border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm",
+          "inset-x-0 bottom-0 border-t max-h-[50vh] md:max-h-[60vh] data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom overflow-y-auto",
+        left: "inset-y-0 left-0 h-full w-full max-w-xs sm:max-w-sm md:max-w-md border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left overflow-y-auto",
         right:
-          "inset-y-0 right-0 h-full w-3/4 border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm",
+          "inset-y-0 right-0 h-full w-full max-w-xs sm:max-w-sm md:max-w-md border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right overflow-y-auto",
       },
     },
     defaultVariants: {
@@ -66,8 +66,8 @@ const SheetContent = React.forwardRef<
       {...props}
     >
       {children}
-      <SheetPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
-        <X className="h-4 w-4" />
+      <SheetPrimitive.Close className="absolute right-3 top-3 rounded-sm p-1 opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary sm:right-4 sm:top-4">
+        <X className="h-4 w-4 sm:h-5 sm:w-5" />
         <span className="sr-only">Close</span>
       </SheetPrimitive.Close>
     </SheetPrimitive.Content>
@@ -81,7 +81,7 @@ const SheetHeader = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      "flex flex-col space-y-2 text-center sm:text-left",
+      "mb-4 flex flex-col space-y-2 text-center sm:mb-6 sm:text-left",
       className,
     )}
     {...props}
@@ -95,7 +95,7 @@ const SheetFooter = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
+      "mt-6 flex flex-col-reverse gap-3 border-t pt-4 sm:mt-8 sm:flex-row sm:justify-end sm:gap-2 sm:pt-6",
       className,
     )}
     {...props}
@@ -109,7 +109,10 @@ const SheetTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Title
     ref={ref}
-    className={cn("text-lg font-semibold text-foreground", className)}
+    className={cn(
+      "text-base font-semibold text-foreground sm:text-lg md:text-xl",
+      className,
+    )}
     {...props}
   />
 ));
@@ -121,7 +124,7 @@ const SheetDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Description
     ref={ref}
-    className={cn("text-sm text-muted-foreground", className)}
+    className={cn("text-xs text-muted-foreground sm:text-sm", className)}
     {...props}
   />
 ));

@@ -120,7 +120,7 @@ const UpsertSheetContent = ({
   //
 
   return (
-    <SheetContent className="!max-w-[640px]">
+    <SheetContent className="!max-w-[680px]">
       <SheetHeader>
         <SheetTitle className="font-semibold text-purple-600">
           Atendimentos de clientes
