@@ -22,7 +22,6 @@ import {
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Product } from "@prisma/client";
-import { PlusIcon } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
@@ -155,7 +154,10 @@ const UpsertSheetContent = ({
         </form>
       </Form>
 
-      <TableContent selectedProducts={selectedProducts} />
+      <TableContent
+        selectedProducts={selectedProducts}
+        hanldeSelectedProducts={setSelectedProducts}
+      />
     </SheetContent>
   );
 };
