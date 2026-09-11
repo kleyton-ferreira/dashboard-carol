@@ -120,14 +120,14 @@ const UpsertSheetContent = ({
   //
 
   return (
-    <SheetContent className="!max-w-[680px]">
+    <SheetContent className="!max-w-[720px]">
       <SheetHeader>
-        <SheetTitle className="font-semibold text-purple-600">
-          Atendimentos de clientes
+        <SheetTitle>
+          <p className="-mb-2 text-[15px] font-semibold text-purple-600">
+            Atendimentos de clientes
+          </p>
         </SheetTitle>
-        <SheetDescription>
-          Informe os dados do cliente e o faturamento realizado.
-        </SheetDescription>
+        <SheetDescription>Faturamento e dados do cliente.</SheetDescription>
       </SheetHeader>
 
       <Form {...forms}>
