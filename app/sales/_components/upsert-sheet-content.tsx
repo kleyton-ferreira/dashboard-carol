@@ -18,6 +18,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetDescription,
+  SheetFooter,
 } from "@/app/_components/ui/sheet";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -26,6 +27,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import TableContent from "./table-content";
+import { CreateSale } from "@/app/_actions/sale/create-sale";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   productId: z.string().min(1, "O cliente e obrigatório.").uuid(),
@@ -42,6 +45,7 @@ type FormSchema = z.infer<typeof formSchema>;
 interface UpsertSheetContentProps {
   products: Product[];
   productsOptions: ComboboxOption[];
+  onSubmitSuccess: () => void;
 }
 
 export interface SelectedProduct {
@@ -55,10 +59,13 @@ export interface SelectedProduct {
 const UpsertSheetContent = ({
   productsOptions,
   products,
+  onSubmitSuccess,
 }: UpsertSheetContentProps) => {
   const [selectedProducts, setSelectedProducts] = useState<SelectedProduct[]>(
     [],
   );
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const forms = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
@@ -117,7 +124,23 @@ const UpsertSheetContent = ({
     });
   };
 
-  //
+  const handleSubmitSales = async () => {
+    setIsSubmitting(true);
+    try {
+      await CreateSale({
+        products: selectedProducts.map((prod) => ({
+          id: prod.id,
+          quantity: prod.quantity,
+        })),
+      });
+      toast.success("Cliente adicionado com sucesso.");
+      onSubmitSuccess();
+    } catch (error) {
+      toast.error("Erro ao adicionar cliente.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <SheetContent className="!max-w-[720px]">
@@ -180,6 +203,17 @@ const UpsertSheetContent = ({
         selectedProducts={selectedProducts}
         hanldeSelectedProducts={setSelectedProducts}
       />
+
+      <SheetFooter>
+        <Button
+          className="w-full"
+          variant="secondary"
+          disabled={selectedProducts.length === 0 || isSubmitting}
+          onClick={handleSubmitSales}
+        >
+          {isSubmitting ? "Enviando..." : "Enviar Clientes"}
+        </Button>
+      </SheetFooter>
     </SheetContent>
   );
 };
