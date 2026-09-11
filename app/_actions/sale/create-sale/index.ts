@@ -6,34 +6,45 @@ import { revalidatePath } from "next/cache";
 
 export const CreateSale = async (data: CreateSaleSchema) => {
     createSaleSchema.parse(data)
-    const sale = await db.sale.create({
-        data: {
-            date: new Date()
-        }
-    })
 
-    for (const product of data.products) {
-
-        const unitPrice = (
-            await db.product.findUnique({
-                where: {
-                    id: product.id
-                }
-            })
-        )?.price
-
-        if (!unitPrice) {
-            throw new Error("Product not found")
-        }
-
-        await db.saleProduct.create({
+    await db.$transaction(async (trx) => {
+        const sale = await trx.sale.create({
             data: {
-                saleId: sale.id,
-                productId: product.id,
-                quantity: product.quantity,
-                unitPrice
+                date: new Date()
             }
         })
-    }
+
+        for (const product of data.products) {
+
+            const productFromDb = (
+                await db.product.findUnique({
+                    where: {
+                        id: product.id
+                    }
+                })
+            )
+
+            if (!productFromDb) {
+                throw new Error("Product not found")
+            }
+
+            const productIsOutOfStock = product.quantity > productFromDb.stock
+            if (productIsOutOfStock) {
+                throw new Error("Product out of stock")
+            }
+
+            await trx.saleProduct.create({
+                data: {
+                    saleId: sale.id,
+                    productId: product.id,
+                    quantity: product.quantity,
+                    unitPrice: productFromDb.price
+                }
+            })
+
+        }
+
+    })
+
     revalidatePath("/sales")
 }
