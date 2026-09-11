@@ -2,6 +2,9 @@
 
 import { Button } from "@/app/_components/ui/button";
 import { Combobox, ComboboxOption } from "@/app/_components/ui/combobox";
+import { CreateSale } from "@/app/_actions/sale/create-sale";
+import { toast } from "sonner";
+import { useAction } from "next-safe-action/hooks";
 
 import {
   Form,
@@ -27,8 +30,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import TableContent from "./table-content";
-import { CreateSale } from "@/app/_actions/sale/create-sale";
-import { toast } from "sonner";
+import { flattenValidationErrors } from "next-safe-action";
 
 const formSchema = z.object({
   productId: z.string().min(1, "O cliente e obrigatório.").uuid(),
@@ -65,7 +67,16 @@ const UpsertSheetContent = ({
     [],
   );
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { execute: executeCreateSale, isPending } = useAction(CreateSale, {
+    onError: ({ error: { validationErrors, serverError } }) => {
+      const flattenedErrors = flattenValidationErrors(validationErrors);
+      toast.error(serverError ?? flattenedErrors.formErrors[0]);
+    },
+    onSuccess: () => {
+      toast.success("Cliente adicionado com sucesso.");
+      onSubmitSuccess();
+    },
+  });
 
   const forms = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
@@ -125,21 +136,12 @@ const UpsertSheetContent = ({
   };
 
   const handleSubmitSales = async () => {
-    setIsSubmitting(true);
-    try {
-      await CreateSale({
-        products: selectedProducts.map((prod) => ({
-          id: prod.id,
-          quantity: prod.quantity,
-        })),
-      });
-      toast.success("Cliente adicionado com sucesso.");
-      onSubmitSuccess();
-    } catch (error) {
-      toast.error("Erro ao adicionar cliente.");
-    } finally {
-      setIsSubmitting(false);
-    }
+    executeCreateSale({
+      products: selectedProducts.map((prod) => ({
+        id: prod.id,
+        quantity: prod.quantity,
+      })),
+    });
   };
 
   return (
@@ -208,10 +210,10 @@ const UpsertSheetContent = ({
         <Button
           className="w-full"
           variant="secondary"
-          disabled={selectedProducts.length === 0 || isSubmitting}
+          disabled={selectedProducts.length === 0 || isPending}
           onClick={handleSubmitSales}
         >
-          {isSubmitting ? "Enviando..." : "Enviar Clientes"}
+          {isPending ? "Enviando..." : "Enviar Clientes"}
         </Button>
       </SheetFooter>
     </SheetContent>
