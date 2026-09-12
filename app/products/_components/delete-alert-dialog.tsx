@@ -10,6 +10,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/app/_components/ui/alert-dialog";
+import { useAction } from "next-safe-action/hooks";
 
 interface DeleteAlertDialogProps {
   product: string;
@@ -17,14 +18,16 @@ interface DeleteAlertDialogProps {
 }
 
 const DeleteAlertDialog = ({ product, productId }: DeleteAlertDialogProps) => {
-  const handleDelete = async () => {
-    try {
-      await deleteProduct({ id: productId });
+  const { execute: executeDeleteProducts } = useAction(deleteProduct, {
+    onSuccess: () => {
       toast.success("Cliente removido com sucesso.");
-    } catch (error) {
+    },
+    onError: () => {
       toast.error("Error ao remover cliente.");
-    }
-  };
+    },
+  });
+
+  const handleDelete = () => executeDeleteProducts({ id: productId });
 
   return (
     <AlertDialogContent>
