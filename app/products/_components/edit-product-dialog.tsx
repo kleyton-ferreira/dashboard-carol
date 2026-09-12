@@ -32,20 +32,23 @@ const EditProductDialog = ({
   onSuccess,
   defaultValues,
 }: EditProductDialogProps) => {
-  const { execute: executeCreatedProduct } = useAction(createdProducts, {
-    onSuccess: () => {
-      const isEditing = !!defaultValues?.id;
-      const successMessage = isEditing
-        ? "Cliente editado com sucesso."
-        : "Cliente adicionado com sucesso.";
+  const { execute: executeCreatedProduct, isPending } = useAction(
+    createdProducts,
+    {
+      onSuccess: () => {
+        const isEditing = !!defaultValues?.id;
+        const successMessage = isEditing
+          ? "Cliente editado com sucesso."
+          : "Cliente adicionado com sucesso.";
 
-      toast.success(successMessage);
-      onSuccess?.();
+        toast.success(successMessage);
+        onSuccess?.();
+      },
+      onError: () => {
+        toast.error("Erro ao adicionar/editar cliente.");
+      },
     },
-    onError: () => {
-      toast.error("Erro ao adicionar/editar cliente.");
-    },
-  });
+  );
 
   const forms = useForm<CreateProductSchema>({
     shouldUnregister: true,
@@ -91,10 +94,10 @@ const EditProductDialog = ({
             <Button
               variant="secondary"
               type="submit"
-              disabled={forms.formState.isSubmitting}
+              disabled={isPending}
               className="w-full sm:w-[150px]"
             >
-              {forms.formState.isSubmitting ? (
+              {isPending ? (
                 <>
                   <Loader2Icon size={16} className="animate-spin" />
                   Salvando...

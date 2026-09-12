@@ -19,6 +19,7 @@ import { useState } from "react";
 import TableContent from "./table-content";
 import { flattenValidationErrors } from "next-safe-action";
 import SelectionClient from "./selection-client";
+import { Loader2Icon } from "lucide-react";
 
 // esse
 
@@ -94,7 +95,14 @@ const UpsertSheetContent = ({
           disabled={selectedProducts.length === 0 || isPending}
           onClick={handleSubmitSales}
         >
-          {isPending ? "Enviando..." : "Enviar Clientes"}
+          {isPending ? (
+            <>
+              <Loader2Icon size={16} className="animate-spin" />
+              Enviando...
+            </>
+          ) : (
+            "Enviar Clientes"
+          )}
         </Button>
       </SheetFooter>
     </SheetContent>
