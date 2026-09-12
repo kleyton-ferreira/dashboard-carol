@@ -21,6 +21,7 @@ import {
   DialogTitle,
 } from "@/app/_components/ui/dialog";
 import { Button } from "@/app/_components/ui/button";
+import { useAction } from "next-safe-action/hooks";
 
 interface EditProductDialogProps {
   defaultValues?: CreateProductSchema;
@@ -31,6 +32,21 @@ const EditProductDialog = ({
   onSuccess,
   defaultValues,
 }: EditProductDialogProps) => {
+  const { execute: executeCreatedProduct } = useAction(createdProducts, {
+    onSuccess: () => {
+      const isEditing = !!defaultValues?.id;
+      const successMessage = isEditing
+        ? "Cliente editado com sucesso."
+        : "Cliente adicionado com sucesso.";
+
+      toast.success(successMessage);
+      onSuccess?.();
+    },
+    onError: () => {
+      toast.error("Erro ao adicionar/editar cliente.");
+    },
+  });
+
   const forms = useForm<CreateProductSchema>({
     shouldUnregister: true,
     resolver: zodResolver(createProductSchema),
@@ -45,19 +61,7 @@ const EditProductDialog = ({
   const isEdition = !!defaultValues;
 
   const handleOnsubmitClick = async (data: CreateProductSchema) => {
-    try {
-      await createdProducts({ ...data, id: defaultValues?.id });
-
-      const isEditing = !!defaultValues?.id;
-      const successMessage = isEditing
-        ? "Cliente editado com sucesso."
-        : "Cliente adicionado com sucesso.";
-
-      toast.success(successMessage);
-      onSuccess?.();
-    } catch (error) {
-      toast.error("Erro ao adicionar/editar cliente.");
-    }
+    executeCreatedProduct(data);
   };
 
   return (

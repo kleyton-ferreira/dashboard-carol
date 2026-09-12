@@ -20,6 +20,14 @@ interface ProductInputsProps {
 const InputsProduct = ({ forms }: ProductInputsProps) => {
   return (
     <div className="grid gap-4 sm:grid-cols-1 sm:gap-5 md:grid-cols-2 xl:grid-cols-1">
+      <FormField
+        control={forms.control}
+        name="id"
+        render={({ field }) => (
+          <input type="hidden" {...field} value={field.value ?? ""} />
+        )}
+      />
+
       {/* INPUT - 1: Nome da Cliente */}
       <FormField
         control={forms.control}
