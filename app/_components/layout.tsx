@@ -14,14 +14,14 @@ export default function Layout({ children, title }: LayoutProps) {
   const { isOpen, toggle, close } = useMobileMenu();
 
   return (
-    <div className="flex h-screen w-full bg-gray-50">
+    <div className="flex h-screen w-full">
       <SidebarResponsive isOpen={isOpen} onClose={close} />
 
       <div className="flex w-full flex-1 flex-col overflow-hidden">
         <Header title={title} onMenuClick={toggle} />
 
         {/* Mostrado apenas em mobile, escondido em desktop */}
-        <div className="flex items-center justify-between border-b border-gray-200 bg-white px-8 py-6 md:hidden">
+        <div className="flex items-center justify-between border-b px-1 py-3 md:hidden">
           <h2 className="text-xl font-bold text-slate-800"></h2>
         </div>
 

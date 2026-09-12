@@ -22,7 +22,7 @@ const CreateSaleButton = ({
   return (
     <Sheet open={sheetIsOpen} onOpenChange={setSheetIsOpen}>
       <SheetTrigger asChild>
-        <Button variant="secondary">
+        <Button variant="secondary" className="m-auto w-[97.9%]">
           <PlusIcon size={16} /> Registrar faturamento
         </Button>
       </SheetTrigger>
