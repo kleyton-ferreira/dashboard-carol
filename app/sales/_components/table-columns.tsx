@@ -1,10 +1,11 @@
 "use client";
 
-import { Button } from "@/app/_components/ui/button";
 import { SalesDto } from "@/app/_data-access/sale/get-sales";
 import { formatBRL } from "@/app/_lib/formatBRL";
 import { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontalIcon } from "lucide-react";
+
+import SaleTableDropdownMenu from "./sale-table-dropdown-menu";
+import { Product } from "@prisma/client";
 
 export const saleTableColmuns: ColumnDef<SalesDto>[] = [
   {
@@ -61,10 +62,11 @@ export const saleTableColmuns: ColumnDef<SalesDto>[] = [
         <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-purple-600 transition-all duration-300 group-hover:w-[calc(100%)]"></span>
       </p>
     ),
-    cell: () => (
-      <Button variant="ghost">
-        <MoreHorizontalIcon size={16} />
-      </Button>
+    cell: ({ row: { original: sale } }) => (
+      <SaleTableDropdownMenu
+        sale={sale}
+        product={{ name: sale.serviceNames } as Product}
+      />
     ),
   },
 ];
