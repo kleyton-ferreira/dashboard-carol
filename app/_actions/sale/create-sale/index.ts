@@ -40,7 +40,5 @@ export const CreateSale = actionClient.schema(createSaleSchema).action(async ({ 
     })
 
     revalidatePath("/sales")
-
-
 })
 

@@ -1,8 +1,12 @@
 import { getProducts } from "../_data-access/product/get-products";
 import { ComboboxOption } from "../_components/ui/combobox";
 import CreateSaleButton from "./_components/create-sale-button";
+import { DataTable } from "../_components/ui/data-table";
+import { saleTableColmuns } from "./_components/table-columns";
+import { getSales } from "../_data-access/sale/get-sales";
 
 const SalesPage = async () => {
+  const sales = await getSales();
   const products = await getProducts();
   const productOptionsValues: ComboboxOption[] = products.map((prod) => ({
     procedure: prod.name,
@@ -28,6 +32,12 @@ const SalesPage = async () => {
             products={JSON.parse(JSON.stringify(products))}
           />
         </div>
+      </div>
+      <div>
+        <DataTable
+          columns={saleTableColmuns}
+          data={JSON.parse(JSON.stringify(sales))}
+        />
       </div>
     </div>
   );
