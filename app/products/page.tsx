@@ -8,12 +8,12 @@ const ProductsPage = async () => {
 
   return (
     <div className="flex h-full w-full flex-col">
-      <div className="flex flex-col items-start justify-between gap-3 border-b border-gray-200 bg-white px-4 py-3 sm:flex-row sm:items-center md:px-8 md:py-4">
-        <div className="">
+      <div className="flex flex-col items-start justify-between gap-4 border-b border-gray-200 bg-white px-4 py-3 sm:flex-row sm:items-center md:px-8 md:py-4">
+        <div className="hidden min-w-0 flex-col gap-1 md:flex">
           <h2 className="hidden text-base font-bold text-slate-800 md:block md:text-lg">
-            Serviçoes & Clientes
+            Serviços & Clientes
           </h2>
-          <p className="mt-1 hidden text-sm text-slate-500 sm:block">
+          <p className="hidden text-sm text-slate-500 sm:block">
             Gerencie seus clientes e serviços
           </p>
         </div>
