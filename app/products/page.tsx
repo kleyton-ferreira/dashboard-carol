@@ -35,13 +35,14 @@ const ProductsPage = async () => {
 
           {products.length === 0 && (
             <div className="relative -top-8 flex flex-col items-center justify-center text-center">
-              <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gray-100"></div>
-              <h3 className="mb-2 text-lg font-semibold text-slate-800">
-                Nenhum cliente encontrado
-              </h3>
-              <p className="mb-6 text-sm text-slate-500">
-                Comece criando seu primeiro cliente
-              </p>
+              <div className="mt-[120px]">
+                <h3 className="mb-2 text-lg font-semibold text-slate-800">
+                  Nenhum cliente encontrado
+                </h3>
+                <p className="mb-6 text-sm text-slate-500">
+                  Comece criando seu primeiro cliente
+                </p>
+              </div>
             </div>
           )}
         </div>

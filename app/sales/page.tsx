@@ -40,6 +40,19 @@ const SalesPage = async () => {
             data={JSON.parse(JSON.stringify(sales))}
           />
         </div>
+
+        {sales.length === 0 && (
+          <div className="relative -top-8 flex flex-col items-center justify-center text-center">
+            <div className="mt-[120px]">
+              <h3 className="mb-2 text-lg font-semibold text-slate-800">
+                Nenhum serviço adicionado
+              </h3>
+              <p className="mb-6 text-sm text-slate-500">
+                Comece adicionando um novo serviço
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
