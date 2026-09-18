@@ -22,10 +22,7 @@ import {
   DropdownMenuTrigger,
 } from "@/app/_components/ui/dropdown-menu";
 
-import {
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-} from "@radix-ui/react-dropdown-menu";
+import { DropdownMenuLabel } from "@radix-ui/react-dropdown-menu";
 import { AlertDialogDescription } from "@radix-ui/react-alert-dialog";
 import { useAction } from "next-safe-action/hooks";
 import { deleteSale } from "@/app/_actions/sale/delete-sale";
@@ -36,7 +33,7 @@ interface TableDropdownMenuProps {
   product?: Product;
 }
 
-const SaleTableDropdownMenu = ({ sale, product }: TableDropdownMenuProps) => {
+const AlertTableDropdownMenu = ({ sale, product }: TableDropdownMenuProps) => {
   const { execute } = useAction(deleteSale, {
     onSuccess: () => {
       toast.success("Serviço removido com sucesso.");
@@ -111,4 +108,4 @@ const SaleTableDropdownMenu = ({ sale, product }: TableDropdownMenuProps) => {
   );
 };
 
-export default SaleTableDropdownMenu;
+export default AlertTableDropdownMenu;

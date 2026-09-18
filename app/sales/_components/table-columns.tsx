@@ -4,8 +4,8 @@ import { SalesDto } from "@/app/_data-access/sale/get-sales";
 import { formatBRL } from "@/app/_lib/formatBRL";
 import { ColumnDef } from "@tanstack/react-table";
 
-import SaleTableDropdownMenu from "./sale-table-dropdown-menu";
 import { Product } from "@prisma/client";
+import AlertTableDropdownMenu from "./alert-table-dropdown-menu";
 
 export const saleTableColmuns: ColumnDef<SalesDto>[] = [
   {
@@ -63,7 +63,7 @@ export const saleTableColmuns: ColumnDef<SalesDto>[] = [
       </p>
     ),
     cell: ({ row: { original: sale } }) => (
-      <SaleTableDropdownMenu
+      <AlertTableDropdownMenu
         sale={sale}
         product={{ name: sale.serviceNames } as Product}
       />
