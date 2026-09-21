@@ -42,17 +42,6 @@ const SalesTableDropdownMenu = ({
           <DropdownMenuContent>
             <DropdownMenuGroup className="space-y-1">
               <DropdownMenuLabel>Ações</DropdownMenuLabel>
-
-              {/*  BOTAO - 1 */}
-              <DialogTrigger asChild>
-                <DropdownMenuItem className="gap-1.5">
-                  <div className="group flex items-center gap-2 duration-300 hover:text-purple-700">
-                    <EditIcon size={16} /> <p>Editar</p>
-                  </div>
-                </DropdownMenuItem>
-              </DialogTrigger>
-              <DropdownMenuSeparator />
-
               {/*  BOTAO - 2 */}
               <AlertDialogTrigger asChild>
                 <DropdownMenuItem
