@@ -18,7 +18,7 @@ export default function Layout({ children, title }: LayoutProps) {
   const isServicesPage =
     pathname.includes("/sales") || pathname.includes("/sales");
 
-  const headerTitle = isServicesPage ? "Serviço concluido" : title;
+  const headerTitle = isServicesPage ? "Serviços concluidos" : title;
 
   return (
     <div className="flex h-screen w-full">
