@@ -19,6 +19,7 @@ const config = {
 			},
 			animation: {
 				shake: "shake 0.5s cubic-bezier(0.36, 0, 0.66, -0.56) infinite",
+				cardEnter: "card-enter': 'cardEnter 0.6s ease-out"
 			},
 			colors: {
 				border: "hsl(var(--border))",

@@ -15,10 +15,16 @@ export default function Layout({ children, title }: LayoutProps) {
   const { isOpen, toggle, close } = useMobileMenu();
   const pathname = usePathname();
 
+  const isHomePage = pathname === "/" || pathname === "/dashboard";
+
   const isServicesPage =
     pathname.includes("/sales") || pathname.includes("/sales");
 
-  const headerTitle = isServicesPage ? "Serviços concluidos" : title;
+  const headerTitle = isHomePage
+    ? "Faturamentos & Atendimentos"
+    : isServicesPage
+      ? "Serviços concluidos"
+      : title;
 
   return (
     <div className="flex h-screen w-full">
