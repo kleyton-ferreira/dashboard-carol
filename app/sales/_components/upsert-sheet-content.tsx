@@ -46,6 +46,10 @@ const UpsertSheetContent = ({
     [],
   );
 
+  const resetAllData = () => {
+    setSelectedProducts([]);
+  };
+
   const { execute: executeCreateSale, isPending } = useAction(CreateSale, {
     onError: ({ error: { validationErrors, serverError } }) => {
       const flattenedErrors = flattenValidationErrors(validationErrors);
@@ -54,6 +58,7 @@ const UpsertSheetContent = ({
     onSuccess: () => {
       toast.success("Cliente adicionado com sucesso.");
       onSubmitSuccess();
+      resetAllData();
     },
   });
 

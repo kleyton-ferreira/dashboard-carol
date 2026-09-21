@@ -58,26 +58,16 @@ const AlertTableDropdownMenu = ({ sale, product }: TableDropdownMenuProps) => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuGroup className="space-y-1">
+            <DropdownMenuGroup className="space-y-3">
               <DropdownMenuLabel>Ações</DropdownMenuLabel>
 
-              <div className="space-y-3">
-                <DialogTrigger asChild>
-                  <DropdownMenuItem>
-                    <div className="group flex items-center gap-2 duration-300 hover:text-purple-700">
-                      <EditIcon size={16} /> <p>Editar</p>
-                    </div>
-                  </DropdownMenuItem>
-                </DialogTrigger>
-
-                <AlertDialogTrigger asChild>
-                  <DropdownMenuItem>
-                    <div className="group flex items-center gap-2 duration-300 hover:text-purple-700">
-                      <TrashIcon size={16} /> <p>Deletar</p>
-                    </div>
-                  </DropdownMenuItem>
-                </AlertDialogTrigger>
-              </div>
+              <AlertDialogTrigger asChild>
+                <DropdownMenuItem>
+                  <div className="group flex items-center gap-2 duration-300 hover:text-purple-700">
+                    <TrashIcon size={16} /> <p>Deletar</p>
+                  </div>
+                </DropdownMenuItem>
+              </AlertDialogTrigger>
             </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>

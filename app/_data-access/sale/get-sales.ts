@@ -9,6 +9,7 @@ export interface SalesDto {
     totalProducts: number
     totalAmount: number
     date: Date
+    totalProcedures: number
 }
 
 type SaleWithProducts = Prisma.SaleGetPayload<{
@@ -40,7 +41,6 @@ export const getSales = async (): Promise<SalesDto[]> => {
             (acc: number, saleProduct) => acc + saleProduct.quantity,
             0
         ),
+        totalProcedures: sale.products.length,
     }))
 }
-
-
