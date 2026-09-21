@@ -4,6 +4,7 @@ import { ReactNode } from "react";
 import Header from "./header";
 import { useMobileMenu } from "../_hooks/useMobileMenu";
 import SidebarResponsive from "./sidebar-responsive";
+import { usePathname } from "next/navigation";
 
 interface LayoutProps {
   children: ReactNode;
@@ -12,13 +13,19 @@ interface LayoutProps {
 
 export default function Layout({ children, title }: LayoutProps) {
   const { isOpen, toggle, close } = useMobileMenu();
+  const pathname = usePathname();
+
+  const isServicesPage =
+    pathname.includes("/sales") || pathname.includes("/sales");
+
+  const headerTitle = isServicesPage ? "Serviços concluidos" : title;
 
   return (
     <div className="flex h-screen w-full">
       <SidebarResponsive isOpen={isOpen} onClose={close} />
 
       <div className="flex w-full flex-1 flex-col overflow-hidden">
-        <Header title={title} onMenuClick={toggle} />
+        <Header title={headerTitle} onMenuClick={toggle} />
 
         {/* Mostrado apenas em mobile, escondido em desktop */}
         <div className="flex items-center justify-between border-b px-1 py-3 md:hidden">
