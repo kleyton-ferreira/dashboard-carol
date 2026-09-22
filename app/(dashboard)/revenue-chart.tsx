@@ -2,7 +2,7 @@
 
 import { ChartConfig, ChartContainer } from "@/app/_components/ui/chart";
 import { DayTotalRevenue } from "@/app/_data-access/dashboard/get-dashboard";
-import { Bar, BarChart, CartesianGrid, XAxis, Tooltip } from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip } from "recharts";
 
 const chartConfig = {
   totalRevenue: {
@@ -17,40 +17,62 @@ interface RevenueChartProps {
 
 const RevenueChart = ({ data }: RevenueChartProps) => {
   return (
-    <div className="flex h-full w-full flex-col">
+    <div className="flex h-full w-full flex-col rounded-lg bg-gradient-to-br from-slate-50 to-slate-100 p-6">
       <ChartContainer
         config={chartConfig}
-        className="h-full min-h-[200px] w-full flex-1 sm:min-h-[300px] md:min-h-[350px] lg:min-h-[400px]"
+        className="h-full min-h-[300px] w-full flex-1"
       >
         <BarChart
-          accessibilityLayer
           data={data}
-          margin={{
-            top: 10,
-            right: 10,
-            left: -20,
-            bottom: 60,
-          }}
+          margin={{ top: 20, right: 30, left: 0, bottom: 60 }}
         >
-          <CartesianGrid vertical={false} strokeDasharray="3 3" />
+          <defs>
+            <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#b124e9" stopOpacity={0.9} />
+              <stop offset="95%" stopColor="#b124e9" stopOpacity={0.5} />
+            </linearGradient>
+          </defs>
+
+          <CartesianGrid
+            strokeDasharray="3 3"
+            stroke="#e2e8f0"
+            vertical={false}
+          />
+
           <XAxis
             dataKey="day"
+            stroke="#94a3b8"
+            tick={{ fontSize: 12, fill: "#64748b" }}
+            axisLine={{ stroke: "#e2e8f0" }}
             tickLine={false}
-            tickMargin={20}
-            axisLine={false}
-            tick={{ fontSize: 12, fill: "#666" }}
             angle={-45}
             textAnchor="end"
             height={80}
           />
+
+          <YAxis
+            stroke="#94a3b8"
+            tick={{ fontSize: 12, fill: "#64748b" }}
+            axisLine={{ stroke: "#e2e8f0" }}
+            tickLine={false}
+            tickFormatter={(value) =>
+              new Intl.NumberFormat("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+                maximumFractionDigits: 0,
+              }).format(value)
+            }
+          />
+
           <Tooltip
             contentStyle={{
-              backgroundColor: "rgba(0, 0, 0, 0.8)",
+              backgroundColor: "rgba(155, 36, 179, 0.95)",
               border: "1px solid #b124e9",
-              borderRadius: "4px",
-              padding: "8px",
+              borderRadius: "8px",
+              padding: "12px",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
             }}
-            labelStyle={{ color: "#fff" }}
+            labelStyle={{ color: "#fff", fontSize: "12px" }}
             formatter={(value) => [
               new Intl.NumberFormat("pt-BR", {
                 style: "currency",
@@ -58,12 +80,14 @@ const RevenueChart = ({ data }: RevenueChartProps) => {
               }).format(value as number),
               "Receita",
             ]}
+            cursor={{ fill: "rgba(251, 249, 252, 0.1)" }}
           />
+
           <Bar
             dataKey="totalRevenue"
-            fill="#b124e9"
-            radius={[4, 4, 0, 0]}
-            isAnimationActive={true}
+            fill="url(#colorRevenue)"
+            radius={[8, 8, 0, 0]}
+            animationDuration={800}
           />
         </BarChart>
       </ChartContainer>
