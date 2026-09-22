@@ -3,8 +3,8 @@ import {
   PackageIcon,
   ShoppingBagIcon,
   ShoppingBasketIcon,
-  ShoppingCartIcon,
 } from "lucide-react";
+
 import {
   SummaryCard,
   SummaryCardTitle,
@@ -13,10 +13,16 @@ import {
 } from "./(dashboard)/summary-card";
 import { getDashboard } from "./_data-access/dashboard/get-dashboard";
 import { formatBRL } from "./_lib/formatBRL";
+import RevenueChart from "./(dashboard)/revenue-chart";
 
 const HomePage = async () => {
-  const { todayRevenue, totalProducts, totalRevenue, totalSales } =
-    await getDashboard();
+  const {
+    todayRevenue,
+    totalProducts,
+    totalRevenue,
+    totalSales,
+    totalLast30DaysRevenue,
+  } = await getDashboard();
 
   return (
     <div className="flex h-full w-full flex-col">
@@ -33,7 +39,7 @@ const HomePage = async () => {
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-6">
           <SummaryCard>
             <SummaryCardIcon>
-              <DollarSign />
+              <DollarSign className="animate-pulse" />
             </SummaryCardIcon>
             <SummaryCardTitle>Faturamento Total</SummaryCardTitle>
             <SummaryCardValue> {formatBRL(totalRevenue)} </SummaryCardValue>
@@ -41,7 +47,7 @@ const HomePage = async () => {
 
           <SummaryCard>
             <SummaryCardIcon>
-              <ShoppingBagIcon />
+              <ShoppingBagIcon className="animate-pulse" />
             </SummaryCardIcon>
             <SummaryCardTitle>Faturamento Hoje</SummaryCardTitle>
             <SummaryCardValue> {formatBRL(todayRevenue)} </SummaryCardValue>
@@ -51,7 +57,7 @@ const HomePage = async () => {
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-6 lg:grid-cols-2">
           <SummaryCard>
             <SummaryCardIcon>
-              <ShoppingBasketIcon />
+              <ShoppingBasketIcon className="animate-pulse" />
             </SummaryCardIcon>
             <SummaryCardTitle>Atendimento de clientes</SummaryCardTitle>
             <SummaryCardValue> {totalProducts} </SummaryCardValue>
@@ -59,12 +65,20 @@ const HomePage = async () => {
 
           <SummaryCard>
             <SummaryCardIcon>
-              <PackageIcon />
+              <PackageIcon className="animate-pulse" />
             </SummaryCardIcon>
             <SummaryCardTitle>Atendimentos concluidos</SummaryCardTitle>
             <SummaryCardValue> {totalSales} </SummaryCardValue>
           </SummaryCard>
         </div>
+      </div>
+
+      <div className="flex h-full min-h-[406px] flex-col overflow-hidden rounded-xl bg-white p-6">
+        <p className="text-[15px] font-bold text-purple-600 md:text-lg">
+          Faturamento Total
+        </p>
+        <p className="text-sm text-slate-500">últimos 30 dias</p>
+        <RevenueChart data={totalLast30DaysRevenue} />
       </div>
     </div>
   );
