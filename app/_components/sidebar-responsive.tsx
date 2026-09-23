@@ -35,14 +35,19 @@ const SidebarResponsive = ({ isOpen = false, onClose }: SidebarProps) => {
         }}
       >
         {/* Close Button */}
-        <button
-          onClick={onClose}
-          className="absolute right-4 top-4 z-50 rounded-lg p-2 transition-colors hover:bg-white/20"
-          aria-label="Fechar menu"
-          type="button"
-        >
-          <X size={24} className="text-slate-700" />
-        </button>
+        <div className="group">
+          <button
+            onClick={onClose}
+            className="absolute right-4 top-4 z-50 rounded-lg p-2 transition-colors duration-300 hover:bg-purple-500"
+            aria-label="Fechar menu"
+            type="button"
+          >
+            <X
+              size={24}
+              className="text-slate-700 transition-colors duration-300 group-hover:text-white"
+            />
+          </button>
+        </div>
 
         {/* Mobile Profile Section */}
         <div className="mb-6 flex items-center gap-3 px-6 pt-16">

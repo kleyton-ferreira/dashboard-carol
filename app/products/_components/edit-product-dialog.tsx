@@ -71,11 +71,11 @@ const EditProductDialog = ({
     <DialogContent className="w-[95%] max-w-lg rounded-lg sm:w-full">
       <Form {...forms}>
         <form onSubmit={forms.handleSubmit(handleOnsubmitClick)}>
-          <DialogHeader className="mb-4 space-y-2 sm:mb-6">
-            <DialogTitle className="text-lg text-purple-600 sm:text-xl">
+          <DialogHeader className="mb-5 space-y-0 sm:mb-6">
+            <DialogTitle className="text-left text-lg text-purple-600 sm:text-xl">
               {isEdition ? "Editar" : "Marcação"} de Cliente
             </DialogTitle>
-            <DialogDescription className="text-sm sm:text-base">
+            <DialogDescription className="text-left text-sm sm:text-base">
               Informações abaixo
             </DialogDescription>
           </DialogHeader>
