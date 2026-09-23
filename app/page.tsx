@@ -14,6 +14,7 @@ import {
 import { getDashboard } from "./_data-access/dashboard/get-dashboard";
 import { formatBRL } from "./_lib/formatBRL";
 import RevenueChart from "./(dashboard)/revenue-chart";
+import MostSoldClientItem from "./_data-access/dashboard/most-sold-client-item";
 
 const HomePage = async () => {
   const {
@@ -22,6 +23,7 @@ const HomePage = async () => {
     totalRevenue,
     totalSales,
     totalLast30DaysRevenue,
+    mostSoldProducts,
   } = await getDashboard();
 
   return (
@@ -54,7 +56,7 @@ const HomePage = async () => {
           </SummaryCard>
         </div>
 
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-6 lg:grid-cols-2">
+        <div className="mb-8 grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-6 lg:grid-cols-2">
           <SummaryCard>
             <SummaryCardIcon>
               <ShoppingBasketIcon className="animate-pulse" />
@@ -73,12 +75,32 @@ const HomePage = async () => {
         </div>
       </div>
 
-      <div className="flex h-full min-h-[406px] flex-col overflow-hidden rounded-xl bg-white p-6">
-        <p className="text-[15px] font-bold text-purple-600 md:text-lg">
-          Faturamento Total
-        </p>
-        <p className="text-sm text-slate-500">últimos 30 dias</p>
-        <RevenueChart data={totalLast30DaysRevenue} />
+      <div className="grid min-h-0 grid-cols-1 gap-1 lg:grid-cols-[minmax(0,2.5fr),minmax(0,1fr)]">
+        <div className="flex h-full min-h-[406px] flex-col overflow-hidden rounded-xl bg-white p-4 sm:p-5 md:p-6">
+          <div className="text-center">
+            <p className="text-[15px] font-bold text-purple-600 md:text-lg">
+              Faturamento dos Últimos 30 dias
+            </p>
+            <p className="text-xs text-slate-500 md:text-sm">
+              Acompanhe seus faturamentos diários
+            </p>
+          </div>
+          <RevenueChart data={totalLast30DaysRevenue} />
+        </div>
+        <div className="flex h-full min-h-[300px] flex-col overflow-hidden rounded-lg bg-white p-4 sm:p-5 md:p-6">
+          <p className="mb-2 text-sm font-bold text-purple-700 sm:mb-3 sm:text-base md:mb-4">
+            Clientes e Serviço
+          </p>
+
+          <div className="min-h-0 flex-1 space-y-1.5 overflow-auto sm:space-y-2">
+            {mostSoldProducts.map((clientItem) => (
+              <MostSoldClientItem
+                product={clientItem}
+                key={clientItem.productId}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -20,11 +20,11 @@ const RevenueChart = ({ data }: RevenueChartProps) => {
     <div className="flex h-full w-full flex-col rounded-lg bg-gradient-to-br from-slate-50 to-slate-100 p-6">
       <ChartContainer
         config={chartConfig}
-        className="h-full min-h-[300px] w-full flex-1"
+        className="h-full min-h-[410px] w-full flex-1 md:min-h-[350px] lg:min-h-[474px]"
       >
         <BarChart
           data={data}
-          margin={{ top: 20, right: 30, left: 0, bottom: 60 }}
+          margin={{ top: 20, right: -8, left: -9, bottom: 60 }}
         >
           <defs>
             <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">

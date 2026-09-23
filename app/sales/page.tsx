@@ -33,7 +33,7 @@ const SalesPage = async () => {
           />
         </div>
       </div>
-      <div className="overflow-hidden rounded-lg border border-gray-200 bg-white p-4 shadow-sm md:p-8">
+      <div className="overflow-hidden overflow-y-auto rounded-lg border border-gray-200 bg-white p-4 shadow-sm md:p-8">
         <div className="overflow-x-auto md:flex md:flex-col">
           <DataTable
             columns={saleTableColmuns}
