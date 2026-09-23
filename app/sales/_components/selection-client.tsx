@@ -19,7 +19,7 @@ import { Product } from "@prisma/client";
 import { SelectedProduct } from "./upsert-sheet-content";
 
 const formSchema = z.object({
-  productId: z.string().min(1, "O cliente e obrigatório.").uuid(),
+  productId: z.string().min(1, "A seleção de clientes e obrigatório.").uuid(),
   quantity: z.coerce
     .number({
       required_error: "A quantidade é obrigatória.",
