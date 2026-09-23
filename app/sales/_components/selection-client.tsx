@@ -109,10 +109,12 @@ const SelectionClient = ({
           name="productId"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-purple-600">Cliente</FormLabel>
+              <FormLabel className="text-[16px] text-purple-600 md:text-[18px]">
+                Busca de clientes
+              </FormLabel>
 
               <Combobox
-                placeholder="Selecione a clientes"
+                placeholder="Selecionar clientes"
                 options={productsOptions}
                 onChange={field.onChange}
                 value={field.value}
@@ -140,7 +142,7 @@ const SelectionClient = ({
         />
 
         <Button variant="secondary" className="w-full gap-2" type="submit">
-          Selecionar Clientes
+          Adicionar Clientes
         </Button>
       </form>
     </Form>

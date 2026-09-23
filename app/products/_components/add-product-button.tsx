@@ -16,7 +16,7 @@ const AddProductButton = () => {
           variant="secondary"
           className="absolute left-0 right-0 top-[102px] z-10 mx-4 md:static md:relative md:top-0 md:mx-0"
         >
-          <PlusIcon size={18} /> Adicionar cliente
+          <PlusIcon size={16} /> Adicionar cliente
         </Button>
       </DialogTrigger>
 

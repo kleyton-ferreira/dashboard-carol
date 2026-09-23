@@ -150,7 +150,7 @@ const TableContent = ({
               {/* Valor Total Destaque */}
               <div className="rounded-md bg-purple-500 p-1">
                 <p className="text-xs font-medium uppercase tracking-wide text-white">
-                  Valor Total
+                  Valor Serviço
                 </p>
                 <p className="mt-1 text-lg font-bold text-white">
                   {formatBRL(productItens.price * productItens.quantity)}
@@ -165,7 +165,7 @@ const TableContent = ({
           <div className="mt-4 rounded-lg bg-gradient-to-r from-purple-50 to-purple-100 p-4">
             <div className="flex items-center justify-between">
               <span className="text-sm font-semibold text-slate-700">
-                Total Geral
+                Valor total
               </span>
               <span className="text-[22px] font-bold text-purple-700">
                 {formatBRL(productTotal)}

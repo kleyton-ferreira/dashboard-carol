@@ -75,11 +75,13 @@ const UpsertSheetContent = ({
     <SheetContent className="!max-w-[720px]">
       <SheetHeader>
         <SheetTitle>
-          <p className="-mb-2 text-[15px] font-semibold text-purple-600">
-            Atendimentos de clientes
+          <p className="-mb-2 text-left text-sm font-semibold text-purple-600">
+            Atendimentos de clientes concluidos
           </p>
         </SheetTitle>
-        <SheetDescription>Faturamento e dados do cliente.</SheetDescription>
+        <SheetDescription className="text-left">
+          Adicionar dados da cliente
+        </SheetDescription>
       </SheetHeader>
 
       <SelectionClient
