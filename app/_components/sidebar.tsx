@@ -1,5 +1,6 @@
 import { LayoutGridIcon, PackageIcon, ShoppingBasketIcon } from "lucide-react";
 import SidebarButton from "./ui/sidebar-button";
+import Image from "next/image";
 
 const Sidebar = () => {
   return (
@@ -14,7 +15,7 @@ const Sidebar = () => {
         <div className="relative h-24 w-24 md:h-28 md:w-28">
           <div className="animate-rotate_border absolute inset-0 rounded-full bg-gradient-to-r from-purple-300 to-gray-300"></div>
           <div className="absolute inset-2 flex items-center justify-center overflow-hidden rounded-full bg-white">
-            <img
+            <Image
               src="/img.png"
               alt="Profile"
               width={100}

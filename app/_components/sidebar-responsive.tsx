@@ -7,6 +7,7 @@ import {
   X,
 } from "lucide-react";
 import SidebarButton from "./ui/sidebar-button";
+import Image from "next/image";
 
 interface SidebarProps {
   isOpen?: boolean;
@@ -54,7 +55,7 @@ const SidebarResponsive = ({ isOpen = false, onClose }: SidebarProps) => {
           <div className="relative h-20 w-20">
             <div className="animate-rotate_border absolute inset-0 rounded-full bg-gradient-to-r from-purple-300 to-gray-300"></div>
             <div className="absolute inset-2 flex items-center justify-center overflow-hidden rounded-full bg-white">
-              <img
+              <Image
                 src="/img.png"
                 alt="Profile"
                 width={80}
