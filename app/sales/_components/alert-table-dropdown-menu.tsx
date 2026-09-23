@@ -79,8 +79,8 @@ const AlertTableDropdownMenu = ({ sale, product }: TableDropdownMenuProps) => {
             </AlertDialogTitle>
             <AlertDialogDescription className="text-base">
               Você deseja excluir esse serviço{" "}
-              <strong className="text-purple-700">"{product?.name}"</strong>.
-              Esta ação não pode ser desfeita. Deseja continuar?
+              <strong className="text-purple-700">{product?.name}</strong>. Esta
+              ação não pode ser desfeita. Deseja continuar?
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
