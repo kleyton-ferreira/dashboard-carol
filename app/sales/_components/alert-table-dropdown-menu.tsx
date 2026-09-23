@@ -1,6 +1,6 @@
-import { EditIcon, MoreHorizontalIcon, TrashIcon } from "lucide-react";
+import { MoreHorizontalIcon, TrashIcon } from "lucide-react";
 import { Button } from "@/app/_components/ui/button";
-import { Dialog, DialogTrigger } from "@/app/_components/ui/dialog";
+import { Dialog } from "@/app/_components/ui/dialog";
 import { Product, Sale } from "@prisma/client";
 
 import {
