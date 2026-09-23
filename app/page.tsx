@@ -31,7 +31,7 @@ const HomePage = async () => {
       <div className="gap-4 border-b border-gray-200 bg-white px-4 py-3 sm:flex-row sm:items-center md:px-8 md:py-4">
         <div className="hidden min-w-0 flex-col gap-1 md:flex">
           <h2 className="hidden text-base font-bold text-slate-800 md:block md:text-lg">
-            Faturamento & Atendimento
+            Faturamentos & Atendimentos
           </h2>
           <p className="hidden text-sm text-slate-500 sm:block">
             Histórico de faturamentos e serviços
@@ -89,7 +89,7 @@ const HomePage = async () => {
         </div>
         <div className="flex h-full min-h-[300px] flex-col overflow-hidden rounded-lg bg-white p-4 sm:p-5 md:p-6">
           <p className="mb-2 text-sm font-bold text-purple-700 sm:mb-3 sm:text-base md:mb-4">
-            Clientes e Serviço
+            Clientes e Serviços
           </p>
 
           <div className="min-h-0 flex-1 space-y-1.5 overflow-auto sm:space-y-2">

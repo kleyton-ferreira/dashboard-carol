@@ -6,7 +6,7 @@ import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip } from "recharts";
 
 const chartConfig = {
   totalRevenue: {
-    label: "Receitas",
+    label: "",
     color: "#b124e9",
   },
 } satisfies ChartConfig;
@@ -66,11 +66,12 @@ const RevenueChart = ({ data }: RevenueChartProps) => {
 
           <Tooltip
             contentStyle={{
-              backgroundColor: "rgba(155, 36, 179, 0.95)",
+              backgroundColor: "rgba(154, 43, 177, 0.95)",
               border: "1px solid #b124e9",
               borderRadius: "8px",
               padding: "12px",
               boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+              color: "#fff",
             }}
             labelStyle={{ color: "#fff", fontSize: "12px" }}
             formatter={(value) => [
@@ -78,7 +79,7 @@ const RevenueChart = ({ data }: RevenueChartProps) => {
                 style: "currency",
                 currency: "BRL",
               }).format(value as number),
-              "Receita",
+              "Faturamentos",
             ]}
             cursor={{ fill: "rgba(251, 249, 252, 0.1)" }}
           />
