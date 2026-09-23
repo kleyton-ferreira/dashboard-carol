@@ -6,12 +6,12 @@ import { useMobileMenu } from "../_hooks/useMobileMenu";
 import SidebarResponsive from "./sidebar-responsive";
 import { usePathname } from "next/navigation";
 
-interface LayoutProps {
+interface AppLayoutProps {
   children: ReactNode;
   title: string;
 }
 
-export default function Layout({ children, title }: LayoutProps) {
+export default function AppLayout({ children, title }: AppLayoutProps) {
   const { isOpen, toggle, close } = useMobileMenu();
   const pathname = usePathname();
 

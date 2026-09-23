@@ -3,7 +3,7 @@ import { Sora, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 import { Toaster } from "sonner";
-import Layout from "./_components/layout";
+import Layout from "./_components/app-layout";
 import Sidebar from "./_components/sidebar";
 
 const sora = Sora({
