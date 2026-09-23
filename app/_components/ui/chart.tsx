@@ -139,9 +139,7 @@ const ChartTooltipContent = React.forwardRef<
       }
 
       const [item] = payload;
-      const itemDataKey =
-        (item as any)?.dataKey || (item as any)?.name || "value";
-      const key = labelKey || itemDataKey;
+      const key = `${labelKey || item?.dataKey || item?.name || "value"}`;
       const itemConfig = getPayloadConfigFromPayload(config, item, key);
       const value =
         !labelKey && typeof label === "string"
@@ -190,31 +188,20 @@ const ChartTooltipContent = React.forwardRef<
           {payload
             .filter((item) => item.type !== "none")
             .map((item, index) => {
-              const itemDataKey =
-                (item as any)?.dataKey || (item as any)?.name || "value";
-              const key = nameKey || itemDataKey;
+              const key = `${nameKey || item.name || item.dataKey || "value"}`;
               const itemConfig = getPayloadConfigFromPayload(config, item, key);
-              const indicatorColor =
-                color || (item as any)?.payload?.fill || item.color;
+              const indicatorColor = color || item.payload.fill || item.color;
 
               return (
                 <div
-                  key={`${itemDataKey}-${index}`}
+                  key={item.dataKey}
                   className={cn(
                     "flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5 [&>svg]:text-muted-foreground",
                     indicator === "dot" && "items-center",
                   )}
                 >
-                  {formatter &&
-                  item?.value !== undefined &&
-                  (item as any)?.name ? (
-                    formatter(
-                      item.value,
-                      (item as any).name,
-                      item,
-                      index,
-                      (item as any).payload,
-                    )
+                  {formatter && item?.value !== undefined && item.name ? (
+                    formatter(item.value, item.name, item, index, item.payload)
                   ) : (
                     <>
                       {itemConfig?.icon ? (
@@ -250,7 +237,7 @@ const ChartTooltipContent = React.forwardRef<
                         <div className="grid gap-1.5">
                           {nestLabel ? tooltipLabel : null}
                           <span className="text-muted-foreground">
-                            {itemConfig?.label || itemDataKey}
+                            {itemConfig?.label || item.name}
                           </span>
                         </div>
                         {item.value && (
@@ -302,15 +289,13 @@ const ChartLegendContent = React.forwardRef<
       >
         {payload
           .filter((item) => item.type !== "none")
-          .map((item, index) => {
-            const itemDataKey =
-              (item as any)?.dataKey || (item as any)?.name || "value";
-            const key = nameKey || itemDataKey;
+          .map((item) => {
+            const key = `${nameKey || item.value || "value"}`;
             const itemConfig = getPayloadConfigFromPayload(config, item, key);
 
             return (
               <div
-                key={`${itemDataKey}-${index}`}
+                key={item.value}
                 className={cn(
                   "flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted-foreground",
                 )}
@@ -325,7 +310,7 @@ const ChartLegendContent = React.forwardRef<
                     }}
                   />
                 )}
-                {itemConfig?.label || itemDataKey}
+                {itemConfig?.label}
               </div>
             );
           })}
