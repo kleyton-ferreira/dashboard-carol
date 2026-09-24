@@ -38,7 +38,7 @@ const HomePage = async () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-6">
+        <div className="mb-3 grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-6">
           <SummaryCard>
             <SummaryCardIcon>
               <DollarSign className="animate-pulse" />
