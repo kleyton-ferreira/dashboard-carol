@@ -1,4 +1,4 @@
-import { MostSoldProductDto } from "./get-dashboard";
+import { MostSoldProductDto } from "../_data-access/dashboard/get-dashboard";
 import { formatBRL } from "@/app/_lib/formatBRL";
 
 interface MostSoldClientItemProps {

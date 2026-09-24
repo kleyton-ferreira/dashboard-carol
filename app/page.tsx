@@ -14,7 +14,7 @@ import {
 import { getDashboard } from "./_data-access/dashboard/get-dashboard";
 import { formatBRL } from "./_lib/formatBRL";
 import RevenueChart from "./(dashboard)/revenue-chart";
-import MostSoldClientItem from "./_data-access/dashboard/most-sold-client-item";
+import MostSoldClientItem from "./(dashboard)/most-sold-client-item";
 
 const HomePage = async () => {
   const {
