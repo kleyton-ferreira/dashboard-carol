@@ -1,7 +1,6 @@
 import { db } from "@/app/_lib/prisma"
 import dayjs from "dayjs"
 import { ProductStatus } from "./get-status"
-import { Product } from "@prisma/client"
 
 export interface DayTotalRevenue {
     day: string
