@@ -8,7 +8,7 @@ interface MostSoldClientItemProps {
 const MostSoldClientItem = ({ product }: MostSoldClientItemProps) => {
   return (
     <div className="flex items-center justify-between">
-      <div className="m-[10px] space-y-2 pt-6">
+      <div className="m-[10px] space-y-0 pt-6">
         <h2 className="font-bold text-purple-700"> {product.nameClient} </h2>
         <h3 className="text-slate-90000 font-semibold"> {product.name} </h3>
         <p className="font-medium text-slate-500">
