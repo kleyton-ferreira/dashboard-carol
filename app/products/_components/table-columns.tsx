@@ -1,13 +1,13 @@
 "use client";
 
-import { Product } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 
 import ProductStatusBadge from "./product-status-badge";
 import DropdownProductButton from "./dropdown-product-button";
 import { formatBRL } from "@/app/_lib/formatBRL";
+import { ProductDto } from "@/app/_data-access/dashboard/get-status";
 
-export const productTableColumns: ColumnDef<Product>[] = [
+export const productTableColumns: ColumnDef<ProductDto>[] = [
   {
     accessorKey: "nameClient",
     header: () => (
