@@ -1,6 +1,5 @@
 import { Badge } from "@/app/_components/ui/badge";
 import { ProductDto } from "@/app/_data-access/product/get-products";
-import { Product } from "@prisma/client";
 import { CircleIcon } from "lucide-react";
 
 interface ProductStatusBadgeProps {
